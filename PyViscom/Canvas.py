@@ -1,7 +1,7 @@
 import numpy as np
 import glfw
-from Framework.Shader import Shader
-from Framework.Texture import Texture
+from PyViscom.Shader import Shader
+from PyViscom.Texture import Texture
 from OpenGL.GL import *
 
 
