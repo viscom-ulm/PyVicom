@@ -1,0 +1,4 @@
+venv
+Framework/__pycache__
+.idea
+main.py

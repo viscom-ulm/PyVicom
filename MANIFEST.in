@@ -1,0 +1,7 @@
+include Framework/shader/*.vert
+include Framework/shader/*.frag
+include media/uniform/*.dat
+include media/uniform/*.raw
+include media/unstructured/*.ele
+include media/unstructured/*.face
+include media/unstructured/*.node
