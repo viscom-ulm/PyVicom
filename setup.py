@@ -10,6 +10,6 @@ setuptools.setup(
     maintainer='Sebastian Hartwig',
     maintainer_email='sebastian.hartwig@uni-ulm.de',
     packages=setuptools.find_packages(),
-    install_requires=['numpy', 'glfw', 'PyOpenGL', 'glm'],
+    install_requires=['numpy', 'glfw', 'PyOpenGL', 'pyglm'],
     include_package_data=True
 )
