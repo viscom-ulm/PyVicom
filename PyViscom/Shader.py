@@ -6,7 +6,7 @@ class Shader:
     def __init__(self):
         self.programId = -1
 
-    def setShader(self, vert, frag):
+    def set_shader(self, vert, frag):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         absolute_vertex_shader_path = os.path.join(dir_path, 'shader', vert)
         absolute_fragment_shader_path = os.path.join(dir_path, 'shader', frag)
@@ -52,5 +52,5 @@ class Shader:
         glDeleteShader(vertex)
         glDeleteShader(fragment)
 
-    def useShader(self):
+    def use_shader(self):
         glUseProgram(self.programId)

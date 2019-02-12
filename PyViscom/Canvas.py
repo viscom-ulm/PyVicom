@@ -42,35 +42,32 @@ class Canvas(object):
         glBindVertexArray(0)
 
         # prepare texture
-        self.draw_buffer = np.zeros((height, width, 3), dtype=float)
+        self.draw_buffer = np.zeros((height, width, 4), dtype=float)
         self.texture = Texture()
-        self.texture.setTexture(self.draw_buffer)
+        self.texture.set_texture(self.draw_buffer)
 
         # prepare shader
         self.shader = Shader()
-        self.shader.setShader(vert="canvas.vert", frag="canvas.frag")
+        self.shader.set_shader(vert="canvas.vert", frag="canvas.frag")
 
     def draw(self):
-        # Loop until the user closes the window
-        while not glfw.window_should_close(self.window):
-            # Render here, e.g. using pyOpenGL
-            if self.updateTex:
-                self.texture.setTexture(self.draw_buffer)
-                self.updateTex = False
-            self.shader.useShader()
-            glActiveTexture(GL_TEXTURE0)
-            self.texture.useTexture()
-            glUniform1i(glGetUniformLocation(self.shader.programId, "draw_texture"), 0)
-            glBindVertexArray(self.shapeVAO)
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4)
+        # Render here, e.g. using pyOpenGL
+        if self.updateTex:
+            self.texture.set_texture(self.draw_buffer)
+            self.updateTex = False
+        self.shader.use_shader()
+        glActiveTexture(GL_TEXTURE0)
+        self.texture.use_texture()
+        glUniform1i(glGetUniformLocation(self.shader.programId, "draw_texture"), 0)
+        glBindVertexArray(self.shapeVAO)
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4)
 
-            # Swap front and back buffers
-            glfw.swap_buffers(self.window)
+        # Swap front and back buffers
+        glfw.swap_buffers(self.window)
 
-            # Poll for and process events
-            glfw.poll_events()
+        # Poll for and process events
+        glfw.poll_events()
 
-        glfw.terminate()
 
     def set_pixel(self, x, y, color):
         self.draw_buffer[y][x] = color
@@ -84,5 +81,6 @@ if __name__ == '__main__':
     c = Canvas()
     for x in range(200, 600):
         for y in range(100,500):
-            c.set_pixel(x, y, (0.0, 0.0, 255.0))
-    c.draw()
+            c.set_pixel(x, y, (0.0, 0.0, 255.0, 255.0))
+    while True:
+        c.draw()
