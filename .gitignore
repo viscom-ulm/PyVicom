@@ -2,3 +2,5 @@ venv
 .idea
 PyViscom/__pycache
 main.py
+PyViscom/__pycache__/
+media/calibration/

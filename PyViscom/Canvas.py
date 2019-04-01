@@ -3,6 +3,8 @@ import glfw
 from PyViscom.Shader import Shader
 from PyViscom.Texture import Texture
 from OpenGL.GL import *
+import time
+import cv2
 
 
 class Canvas(object):
@@ -42,9 +44,9 @@ class Canvas(object):
         glBindVertexArray(0)
 
         # prepare texture
-        self.draw_buffer = np.zeros((height, width, 4), dtype=float)
+        self.draw_buffer = np.zeros((height, width, 4), dtype=np.float32)
         self.texture = Texture()
-        self.texture.set_texture(self.draw_buffer)
+        self.texture.set_texture("D:/hartwig/masterarbeit/multicalib/ulm/out_undist/01/0-0.jpg")
 
         # prepare shader
         self.shader = Shader()
@@ -53,7 +55,7 @@ class Canvas(object):
     def draw(self):
         # Render here, e.g. using pyOpenGL
         if self.updateTex:
-            self.texture.set_texture(self.draw_buffer)
+            self.texture.set_texture_from_buffer(self.draw_buffer)
             self.updateTex = False
         self.shader.use_shader()
         glActiveTexture(GL_TEXTURE0)
@@ -68,7 +70,6 @@ class Canvas(object):
         # Poll for and process events
         glfw.poll_events()
 
-
     def set_pixel(self, x, y, color):
         self.draw_buffer[y][x] = color
         self.updateTex = True
@@ -79,8 +80,10 @@ class Canvas(object):
 
 if __name__ == '__main__':
     c = Canvas()
-    for x in range(200, 600):
-        for y in range(100,500):
-            c.set_pixel(x, y, (0.0, 0.0, 255.0, 255.0))
     while True:
+        start = time.time()
+        #for x in range(200, 600):
+        #    for y in range(100, 500):
+        #        c.set_pixel(x, y, (0.0, 0.0, 255.0, 255.0))
         c.draw()
+        print(time.time() - start)

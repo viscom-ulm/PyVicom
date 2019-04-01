@@ -3,13 +3,14 @@ from OpenGL.GL import *
 
 
 class Shader:
-    def __init__(self):
+    def __init__(self, shader_path='shader'):
         self.programId = -1
+        self.shader_path = shader_path
 
     def set_shader(self, vert, frag):
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        absolute_vertex_shader_path = os.path.join(dir_path, 'shader', vert)
-        absolute_fragment_shader_path = os.path.join(dir_path, 'shader', frag)
+        absolute_vertex_shader_path = os.path.join(dir_path, self.shader_path, vert)
+        absolute_fragment_shader_path = os.path.join(dir_path, self.shader_path, frag)
         if os.path.isfile(absolute_vertex_shader_path) and os.path.isfile(absolute_fragment_shader_path):
             with open(absolute_vertex_shader_path, 'r') as vertex_shader:
                 v = vertex_shader.read()
